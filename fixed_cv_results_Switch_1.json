@@ -1,0 +1,2817 @@
+{
+  "switch_info": {
+    "name": "Switch_1",
+    "image_dimensions": [
+      128,
+      764,
+      3
+    ],
+    "analysis_timestamp": "2025-06-10T18:43:31.098420",
+    "analysis_method": "fixed_pure_computer_vision"
+  },
+  "summary": {
+    "total_ports": 48,
+    "connected_ports": 47,
+    "empty_ports": 1,
+    "utilization_rate": 97.9,
+    "cable_distribution": {
+      "white": 3,
+      "gray": 16,
+      "yellow": 6,
+      "black": 19,
+      "blue": 1,
+      "purple": 2
+    },
+    "led_distribution": {
+      "inactive": 30,
+      "activity": 3,
+      "link": 15
+    }
+  },
+  "ports": [
+    {
+      "port_number": 1,
+      "bbox": [
+        15,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "white",
+      "cable_confidence": 0.551,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.1279,
+            "white": 0.4661,
+            "gray": 0.3026
+          },
+          "max_color_score": 0.4661,
+          "features": {
+            "brightness_mean": 152.6,
+            "brightness_std": 65.5,
+            "brightness_var": 4292.4,
+            "saturation_mean": 10.6,
+            "saturation_std": 8.1,
+            "value_mean": 154.4,
+            "value_std": 66.1,
+            "edge_density": 0.2061,
+            "texture_variance": 2874.1,
+            "gradient_mean": 105.8
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 2,
+      "bbox": [
+        45,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.587,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.1656,
+            "white": 0.0035,
+            "gray": 0.5178
+          },
+          "max_color_score": 0.5178,
+          "features": {
+            "brightness_mean": 114.2,
+            "brightness_std": 50.3,
+            "brightness_var": 2525.1,
+            "saturation_mean": 12.1,
+            "saturation_std": 11.1,
+            "value_mean": 116.7,
+            "value_std": 50.3,
+            "edge_density": 0.2495,
+            "texture_variance": 3069.4,
+            "gradient_mean": 156.1
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 3,
+      "bbox": [
+        76,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.579,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.2746,
+            "white": 0.0245,
+            "gray": 0.5059
+          },
+          "max_color_score": 0.5059,
+          "features": {
+            "brightness_mean": 96.2,
+            "brightness_std": 56.9,
+            "brightness_var": 3233.4,
+            "saturation_mean": 24.5,
+            "saturation_std": 45.6,
+            "value_mean": 98.7,
+            "value_std": 57.0,
+            "edge_density": 0.3627,
+            "texture_variance": 8044.4,
+            "gradient_mean": 273.0
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 4,
+      "bbox": [
+        106,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.518,
+      "led_status": "activity",
+      "led_confidence": 0.657,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0377,
+            "teal": 0.0,
+            "cyan": 0.0175,
+            "purple": 0.0,
+            "green": 0.0098,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.2998,
+            "white": 0.0042,
+            "gray": 0.4186
+          },
+          "max_color_score": 0.4186,
+          "features": {
+            "brightness_mean": 88.3,
+            "brightness_std": 56.7,
+            "brightness_var": 3211.8,
+            "saturation_mean": 40.2,
+            "saturation_std": 63.2,
+            "value_mean": 93.9,
+            "value_std": 59.8,
+            "edge_density": 0.3767,
+            "texture_variance": 8722.3,
+            "gradient_mean": 278.0
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0021,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0328
+          },
+          "max_coverage": 0.0328,
+          "dominant_led": "blue"
+        }
+      }
+    },
+    {
+      "port_number": 5,
+      "bbox": [
+        137,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "yellow",
+      "cable_confidence": 0.631,
+      "led_status": "link",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.4724,
+            "blue": 0.0853,
+            "teal": 0.0007,
+            "cyan": 0.0231,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0014,
+            "black": 0.0839,
+            "white": 0.0,
+            "gray": 0.0992
+          },
+          "max_color_score": 0.4724,
+          "features": {
+            "brightness_mean": 128.1,
+            "brightness_std": 61.2,
+            "brightness_var": 3742.2,
+            "saturation_mean": 142.7,
+            "saturation_std": 80.5,
+            "value_mean": 151.3,
+            "value_std": 68.6,
+            "edge_density": 0.3704,
+            "texture_variance": 6362.3,
+            "gradient_mean": 251.7
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.2404,
+            "red": 0.0,
+            "blue": 0.072
+          },
+          "max_coverage": 0.2404,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 6,
+      "bbox": [
+        167,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "yellow",
+      "cable_confidence": 0.581,
+      "led_status": "link",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.4018,
+            "blue": 0.116,
+            "teal": 0.0014,
+            "cyan": 0.0461,
+            "purple": 0.0,
+            "green": 0.0014,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.0783,
+            "white": 0.1516,
+            "gray": 0.0692
+          },
+          "max_color_score": 0.4018,
+          "features": {
+            "brightness_mean": 144.7,
+            "brightness_std": 73.8,
+            "brightness_var": 5442.1,
+            "saturation_mean": 132.5,
+            "saturation_std": 91.0,
+            "value_mean": 169.2,
+            "value_std": 72.8,
+            "edge_density": 0.3054,
+            "texture_variance": 3832.3,
+            "gradient_mean": 194.8
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0007,
+            "orange": 0.2383,
+            "red": 0.0,
+            "blue": 0.0901
+          },
+          "max_coverage": 0.2383,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 7,
+      "bbox": [
+        198,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "white",
+      "cable_confidence": 0.474,
+      "led_status": "link",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.1943,
+            "blue": 0.0978,
+            "teal": 0.0,
+            "cyan": 0.0503,
+            "purple": 0.0,
+            "green": 0.0014,
+            "red": 0.0,
+            "orange": 0.0021,
+            "black": 0.1034,
+            "white": 0.2481,
+            "gray": 0.0839
+          },
+          "max_color_score": 0.2481,
+          "features": {
+            "brightness_mean": 147.8,
+            "brightness_std": 79.8,
+            "brightness_var": 6368.3,
+            "saturation_mean": 88.9,
+            "saturation_std": 79.8,
+            "value_mean": 164.2,
+            "value_std": 78.7,
+            "edge_density": 0.297,
+            "texture_variance": 6207.0,
+            "gradient_mean": 211.1
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0825,
+            "red": 0.0,
+            "blue": 0.0748
+          },
+          "max_coverage": 0.0825,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 8,
+      "bbox": [
+        229,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.53,
+      "led_status": "activity",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.1139,
+            "blue": 0.1237,
+            "teal": 0.0,
+            "cyan": 0.0259,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0014,
+            "black": 0.3291,
+            "white": 0.0007,
+            "gray": 0.2935
+          },
+          "max_color_score": 0.3291,
+          "features": {
+            "brightness_mean": 79.3,
+            "brightness_std": 58.9,
+            "brightness_var": 3467.0,
+            "saturation_mean": 76.5,
+            "saturation_std": 79.8,
+            "value_mean": 93.4,
+            "value_std": 69.1,
+            "edge_density": 0.3494,
+            "texture_variance": 4301.0,
+            "gradient_mean": 170.5
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0273,
+            "red": 0.0,
+            "blue": 0.1097
+          },
+          "max_coverage": 0.1097,
+          "dominant_led": "blue"
+        }
+      }
+    },
+    {
+      "port_number": 9,
+      "bbox": [
+        259,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.517,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.2977,
+            "white": 0.0035,
+            "gray": 0.4172
+          },
+          "max_color_score": 0.4172,
+          "features": {
+            "brightness_mean": 89.3,
+            "brightness_std": 54.2,
+            "brightness_var": 2940.6,
+            "saturation_mean": 24.3,
+            "saturation_std": 34.3,
+            "value_mean": 91.0,
+            "value_std": 54.6,
+            "edge_density": 0.3319,
+            "texture_variance": 5797.0,
+            "gradient_mean": 210.3
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 10,
+      "bbox": [
+        290,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.485,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.3103,
+            "white": 0.0028,
+            "gray": 0.3718
+          },
+          "max_color_score": 0.3718,
+          "features": {
+            "brightness_mean": 84.3,
+            "brightness_std": 54.8,
+            "brightness_var": 2999.6,
+            "saturation_mean": 36.0,
+            "saturation_std": 43.6,
+            "value_mean": 86.9,
+            "value_std": 55.2,
+            "edge_density": 0.3613,
+            "texture_variance": 6723.1,
+            "gradient_mean": 218.8
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 11,
+      "bbox": [
+        320,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.432,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0042,
+            "red": 0.0,
+            "orange": 0.0035,
+            "black": 0.2809,
+            "white": 0.0077,
+            "gray": 0.2956
+          },
+          "max_color_score": 0.2956,
+          "features": {
+            "brightness_mean": 90.0,
+            "brightness_std": 56.6,
+            "brightness_var": 3202.0,
+            "saturation_mean": 38.7,
+            "saturation_std": 44.4,
+            "value_mean": 93.2,
+            "value_std": 57.5,
+            "edge_density": 0.3627,
+            "texture_variance": 6295.7,
+            "gradient_mean": 215.6
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0028,
+            "orange": 0.0035,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0035,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 12,
+      "bbox": [
+        351,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.481,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0035,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.3655,
+            "white": 0.0056,
+            "gray": 0.2963
+          },
+          "max_color_score": 0.3655,
+          "features": {
+            "brightness_mean": 80.3,
+            "brightness_std": 56.0,
+            "brightness_var": 3133.6,
+            "saturation_mean": 40.7,
+            "saturation_std": 49.1,
+            "value_mean": 82.9,
+            "value_std": 56.8,
+            "edge_density": 0.3159,
+            "texture_variance": 5851.6,
+            "gradient_mean": 215.9
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 13,
+      "bbox": [
+        382,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.47,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.2348,
+            "white": 0.0168,
+            "gray": 0.3494
+          },
+          "max_color_score": 0.3494,
+          "features": {
+            "brightness_mean": 104.4,
+            "brightness_std": 58.3,
+            "brightness_var": 3395.3,
+            "saturation_mean": 29.7,
+            "saturation_std": 41.7,
+            "value_mean": 107.1,
+            "value_std": 59.1,
+            "edge_density": 0.3326,
+            "texture_variance": 6759.7,
+            "gradient_mean": 218.8
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 14,
+      "bbox": [
+        412,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.444,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0014,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.29,
+            "white": 0.0049,
+            "gray": 0.3124
+          },
+          "max_color_score": 0.3124,
+          "features": {
+            "brightness_mean": 94.2,
+            "brightness_std": 58.7,
+            "brightness_var": 3448.6,
+            "saturation_mean": 32.3,
+            "saturation_std": 43.5,
+            "value_mean": 96.6,
+            "value_std": 59.6,
+            "edge_density": 0.3389,
+            "texture_variance": 6425.2,
+            "gradient_mean": 215.4
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0014,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0014,
+          "dominant_led": "green"
+        }
+      }
+    },
+    {
+      "port_number": 15,
+      "bbox": [
+        443,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.541,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.4521,
+            "white": 0.0063,
+            "gray": 0.3033
+          },
+          "max_color_score": 0.4521,
+          "features": {
+            "brightness_mean": 74.4,
+            "brightness_std": 57.4,
+            "brightness_var": 3292.0,
+            "saturation_mean": 33.1,
+            "saturation_std": 42.5,
+            "value_mean": 76.3,
+            "value_std": 58.0,
+            "edge_density": 0.3375,
+            "texture_variance": 6871.6,
+            "gradient_mean": 225.2
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 16,
+      "bbox": [
+        473,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.514,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.4123,
+            "white": 0.0098,
+            "gray": 0.2718
+          },
+          "max_color_score": 0.4123,
+          "features": {
+            "brightness_mean": 78.6,
+            "brightness_std": 57.8,
+            "brightness_var": 3338.3,
+            "saturation_mean": 34.1,
+            "saturation_std": 41.4,
+            "value_mean": 81.1,
+            "value_std": 58.6,
+            "edge_density": 0.3494,
+            "texture_variance": 6568.2,
+            "gradient_mean": 225.5
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 17,
+      "bbox": [
+        504,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.501,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.3948,
+            "white": 0.0091,
+            "gray": 0.2844
+          },
+          "max_color_score": 0.3948,
+          "features": {
+            "brightness_mean": 85.1,
+            "brightness_std": 59.7,
+            "brightness_var": 3568.5,
+            "saturation_mean": 27.7,
+            "saturation_std": 38.3,
+            "value_mean": 87.4,
+            "value_std": 60.3,
+            "edge_density": 0.304,
+            "texture_variance": 5510.3,
+            "gradient_mean": 221.0
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 18,
+      "bbox": [
+        534,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.503,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.3969,
+            "white": 0.0119,
+            "gray": 0.318
+          },
+          "max_color_score": 0.3969,
+          "features": {
+            "brightness_mean": 79.9,
+            "brightness_std": 58.0,
+            "brightness_var": 3362.4,
+            "saturation_mean": 29.5,
+            "saturation_std": 37.3,
+            "value_mean": 82.1,
+            "value_std": 58.9,
+            "edge_density": 0.3208,
+            "texture_variance": 5820.4,
+            "gradient_mean": 226.6
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 19,
+      "bbox": [
+        565,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.5,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.3927,
+            "white": 0.0154,
+            "gray": 0.3082
+          },
+          "max_color_score": 0.3927,
+          "features": {
+            "brightness_mean": 81.1,
+            "brightness_std": 57.9,
+            "brightness_var": 3353.8,
+            "saturation_mean": 30.3,
+            "saturation_std": 39.8,
+            "value_mean": 83.2,
+            "value_std": 58.4,
+            "edge_density": 0.3256,
+            "texture_variance": 5920.9,
+            "gradient_mean": 227.3
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 20,
+      "bbox": [
+        596,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.538,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0182,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.2068,
+            "white": 0.0098,
+            "gray": 0.4465
+          },
+          "max_color_score": 0.4465,
+          "features": {
+            "brightness_mean": 89.9,
+            "brightness_std": 47.6,
+            "brightness_var": 2262.9,
+            "saturation_mean": 29.4,
+            "saturation_std": 37.7,
+            "value_mean": 92.7,
+            "value_std": 48.2,
+            "edge_density": 0.3347,
+            "texture_variance": 4406.0,
+            "gradient_mean": 185.8
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0112,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0112,
+          "dominant_led": "green"
+        }
+      }
+    },
+    {
+      "port_number": 21,
+      "bbox": [
+        626,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "blue",
+      "cable_confidence": 0.514,
+      "led_status": "activity",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.3061,
+            "teal": 0.0,
+            "cyan": 0.0496,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.144,
+            "white": 0.0307,
+            "gray": 0.2795
+          },
+          "max_color_score": 0.3061,
+          "features": {
+            "brightness_mean": 95.2,
+            "brightness_std": 50.6,
+            "brightness_var": 2564.6,
+            "saturation_mean": 71.9,
+            "saturation_std": 72.9,
+            "value_mean": 116.4,
+            "value_std": 57.1,
+            "edge_density": 0.3452,
+            "texture_variance": 3497.0,
+            "gradient_mean": 174.6
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.2411
+          },
+          "max_coverage": 0.2411,
+          "dominant_led": "blue"
+        }
+      }
+    },
+    {
+      "port_number": 22,
+      "bbox": [
+        657,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.511,
+      "led_status": "link",
+      "led_confidence": 0.992,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.1509,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.3019,
+            "white": 0.0168,
+            "gray": 0.2383
+          },
+          "max_color_score": 0.3019,
+          "features": {
+            "brightness_mean": 112.6,
+            "brightness_std": 71.4,
+            "brightness_var": 5097.8,
+            "saturation_mean": 50.2,
+            "saturation_std": 62.2,
+            "value_mean": 119.4,
+            "value_std": 76.3,
+            "edge_density": 0.2914,
+            "texture_variance": 3881.5,
+            "gradient_mean": 189.6
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0496,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0496,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 23,
+      "bbox": [
+        687,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "yellow",
+      "cable_confidence": 0.604,
+      "led_status": "link",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.434,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.1041,
+            "white": 0.0287,
+            "gray": 0.1705
+          },
+          "max_color_score": 0.434,
+          "features": {
+            "brightness_mean": 141.7,
+            "brightness_std": 58.7,
+            "brightness_var": 3449.4,
+            "saturation_mean": 105.7,
+            "saturation_std": 88.6,
+            "value_mean": 156.1,
+            "value_std": 66.7,
+            "edge_density": 0.3145,
+            "texture_variance": 4035.2,
+            "gradient_mean": 188.0
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0811,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0811,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 24,
+      "bbox": [
+        718,
+        5,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.523,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.2502,
+            "white": 0.0133,
+            "gray": 0.4256
+          },
+          "max_color_score": 0.4256,
+          "features": {
+            "brightness_mean": 108.4,
+            "brightness_std": 54.3,
+            "brightness_var": 2949.3,
+            "saturation_mean": 15.9,
+            "saturation_std": 12.3,
+            "value_mean": 110.0,
+            "value_std": 54.2,
+            "edge_density": 0.2369,
+            "texture_variance": 1612.2,
+            "gradient_mean": 110.6
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 25,
+      "bbox": [
+        15,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "white",
+      "cable_confidence": 0.477,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0273,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.0853,
+            "white": 0.3599,
+            "gray": 0.355
+          },
+          "max_color_score": 0.3599,
+          "features": {
+            "brightness_mean": 140.5,
+            "brightness_std": 64.6,
+            "brightness_var": 4169.8,
+            "saturation_mean": 16.9,
+            "saturation_std": 16.3,
+            "value_mean": 144.9,
+            "value_std": 65.4,
+            "edge_density": 0.2061,
+            "texture_variance": 4681.3,
+            "gradient_mean": 145.9
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 26,
+      "bbox": [
+        45,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.466,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0007,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.1468,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.1474,
+            "white": 0.0035,
+            "gray": 0.3445
+          },
+          "max_color_score": 0.3445,
+          "features": {
+            "brightness_mean": 105.4,
+            "brightness_std": 50.5,
+            "brightness_var": 2553.0,
+            "saturation_mean": 34.9,
+            "saturation_std": 35.0,
+            "value_mean": 118.4,
+            "value_std": 58.6,
+            "edge_density": 0.2341,
+            "texture_variance": 2413.9,
+            "gradient_mean": 120.5
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 27,
+      "bbox": [
+        76,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.445,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.16,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.1279,
+            "white": 0.0259,
+            "gray": 0.3145
+          },
+          "max_color_score": 0.3145,
+          "features": {
+            "brightness_mean": 111.1,
+            "brightness_std": 52.7,
+            "brightness_var": 2780.7,
+            "saturation_mean": 39.1,
+            "saturation_std": 34.6,
+            "value_mean": 124.3,
+            "value_std": 59.1,
+            "edge_density": 0.3201,
+            "texture_variance": 2853.0,
+            "gradient_mean": 152.2
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 28,
+      "bbox": [
+        106,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.565,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.2236,
+            "white": 0.0126,
+            "gray": 0.4857
+          },
+          "max_color_score": 0.4857,
+          "features": {
+            "brightness_mean": 93.7,
+            "brightness_std": 49.7,
+            "brightness_var": 2467.1,
+            "saturation_mean": 21.5,
+            "saturation_std": 17.2,
+            "value_mean": 97.4,
+            "value_std": 51.1,
+            "edge_density": 0.2907,
+            "texture_variance": 2628.4,
+            "gradient_mean": 118.8
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 29,
+      "bbox": [
+        137,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.627,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0014,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.5737,
+            "white": 0.0,
+            "gray": 0.1929
+          },
+          "max_color_score": 0.5737,
+          "features": {
+            "brightness_mean": 64.9,
+            "brightness_std": 48.8,
+            "brightness_var": 2380.9,
+            "saturation_mean": 37.4,
+            "saturation_std": 35.4,
+            "value_mean": 68.5,
+            "value_std": 50.5,
+            "edge_density": 0.1768,
+            "texture_variance": 1966.5,
+            "gradient_mean": 120.8
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0014,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0014,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 30,
+      "bbox": [
+        167,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.586,
+      "led_status": "link",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.1649,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.2628,
+            "white": 0.0,
+            "gray": 0.4081
+          },
+          "max_color_score": 0.4081,
+          "features": {
+            "brightness_mean": 79.3,
+            "brightness_std": 48.9,
+            "brightness_var": 2390.9,
+            "saturation_mean": 68.7,
+            "saturation_std": 78.8,
+            "value_mean": 86.7,
+            "value_std": 56.4,
+            "edge_density": 0.2411,
+            "texture_variance": 2578.2,
+            "gradient_mean": 134.3
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.1244,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.1244,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 31,
+      "bbox": [
+        198,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.454,
+      "led_status": "link",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.1377,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0035,
+            "black": 0.327,
+            "white": 0.2089,
+            "gray": 0.1894
+          },
+          "max_color_score": 0.327,
+          "features": {
+            "brightness_mean": 115.3,
+            "brightness_std": 85.4,
+            "brightness_var": 7287.3,
+            "saturation_mean": 49.2,
+            "saturation_std": 69.8,
+            "value_mean": 121.7,
+            "value_std": 88.4,
+            "edge_density": 0.2355,
+            "texture_variance": 4188.5,
+            "gradient_mean": 140.0
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0894,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0894,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 32,
+      "bbox": [
+        229,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "yellow",
+      "cable_confidence": 0.621,
+      "led_status": "link",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.4591,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0049,
+            "black": 0.1405,
+            "white": 0.0196,
+            "gray": 0.0196
+          },
+          "max_color_score": 0.4591,
+          "features": {
+            "brightness_mean": 150.2,
+            "brightness_std": 71.9,
+            "brightness_var": 5174.8,
+            "saturation_mean": 134.7,
+            "saturation_std": 85.1,
+            "value_mean": 169.5,
+            "value_std": 75.9,
+            "edge_density": 0.2732,
+            "texture_variance": 2650.0,
+            "gradient_mean": 142.1
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.2467,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.2467,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 33,
+      "bbox": [
+        259,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "yellow",
+      "cable_confidence": 0.595,
+      "led_status": "link",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.4221,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0021,
+            "black": 0.0929,
+            "white": 0.0545,
+            "gray": 0.1349
+          },
+          "max_color_score": 0.4221,
+          "features": {
+            "brightness_mean": 134.6,
+            "brightness_std": 63.1,
+            "brightness_var": 3978.2,
+            "saturation_mean": 122.8,
+            "saturation_std": 93.5,
+            "value_mean": 152.8,
+            "value_std": 70.1,
+            "edge_density": 0.3557,
+            "texture_variance": 6445.8,
+            "gradient_mean": 207.9
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.283,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.283,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 34,
+      "bbox": [
+        290,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.504,
+      "led_status": "link",
+      "led_confidence": 0.978,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0887,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.399,
+            "white": 0.0196,
+            "gray": 0.318
+          },
+          "max_color_score": 0.399,
+          "features": {
+            "brightness_mean": 83.1,
+            "brightness_std": 60.0,
+            "brightness_var": 3598.1,
+            "saturation_mean": 43.7,
+            "saturation_std": 63.9,
+            "value_mean": 88.5,
+            "value_std": 65.3,
+            "edge_density": 0.3215,
+            "texture_variance": 3937.2,
+            "gradient_mean": 149.6
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0489,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0489,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 35,
+      "bbox": [
+        320,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.575,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0014,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.4997,
+            "white": 0.0035,
+            "gray": 0.3802
+          },
+          "max_color_score": 0.4997,
+          "features": {
+            "brightness_mean": 59.9,
+            "brightness_std": 45.8,
+            "brightness_var": 2101.4,
+            "saturation_mean": 25.3,
+            "saturation_std": 30.4,
+            "value_mean": 62.8,
+            "value_std": 47.1,
+            "edge_density": 0.2648,
+            "texture_variance": 4404.3,
+            "gradient_mean": 126.1
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 36,
+      "bbox": [
+        351,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "purple",
+      "cable_confidence": 0.482,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.2607,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.1866,
+            "white": 0.0014,
+            "gray": 0.2034
+          },
+          "max_color_score": 0.2607,
+          "features": {
+            "brightness_mean": 101.8,
+            "brightness_std": 52.9,
+            "brightness_var": 2800.6,
+            "saturation_mean": 56.8,
+            "saturation_std": 43.2,
+            "value_mean": 120.2,
+            "value_std": 64.1,
+            "edge_density": 0.3159,
+            "texture_variance": 3612.2,
+            "gradient_mean": 146.8
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 37,
+      "bbox": [
+        382,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "purple",
+      "cable_confidence": 0.713,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.5905,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.1859,
+            "white": 0.0007,
+            "gray": 0.0224
+          },
+          "max_color_score": 0.5905,
+          "features": {
+            "brightness_mean": 109.5,
+            "brightness_std": 54.6,
+            "brightness_var": 2977.8,
+            "saturation_mean": 81.4,
+            "saturation_std": 36.3,
+            "value_mean": 143.6,
+            "value_std": 71.3,
+            "edge_density": 0.2439,
+            "texture_variance": 2147.0,
+            "gradient_mean": 115.9
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 38,
+      "bbox": [
+        412,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.546,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0853,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.4584,
+            "white": 0.0007,
+            "gray": 0.153
+          },
+          "max_color_score": 0.4584,
+          "features": {
+            "brightness_mean": 77.0,
+            "brightness_std": 59.6,
+            "brightness_var": 3551.4,
+            "saturation_mean": 27.6,
+            "saturation_std": 29.7,
+            "value_mean": 84.0,
+            "value_std": 66.5,
+            "edge_density": 0.1719,
+            "texture_variance": 1991.5,
+            "gradient_mean": 80.9
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 39,
+      "bbox": [
+        443,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.672,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.6387,
+            "white": 0.0,
+            "gray": 0.1118
+          },
+          "max_color_score": 0.6387,
+          "features": {
+            "brightness_mean": 56.9,
+            "brightness_std": 55.3,
+            "brightness_var": 3054.5,
+            "saturation_mean": 19.4,
+            "saturation_std": 24.9,
+            "value_mean": 58.7,
+            "value_std": 56.5,
+            "edge_density": 0.144,
+            "texture_variance": 1832.0,
+            "gradient_mean": 98.6
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 40,
+      "bbox": [
+        473,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.59,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.522,
+            "white": 0.0,
+            "gray": 0.1349
+          },
+          "max_color_score": 0.522,
+          "features": {
+            "brightness_mean": 66.9,
+            "brightness_std": 53.5,
+            "brightness_var": 2862.4,
+            "saturation_mean": 25.7,
+            "saturation_std": 27.8,
+            "value_mean": 69.0,
+            "value_std": 54.7,
+            "edge_density": 0.1852,
+            "texture_variance": 2404.0,
+            "gradient_mean": 120.0
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 41,
+      "bbox": [
+        504,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.693,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.5618,
+            "white": 0.0,
+            "gray": 0.1055
+          },
+          "max_color_score": 0.5618,
+          "features": {
+            "brightness_mean": 60.5,
+            "brightness_std": 54.0,
+            "brightness_var": 2918.7,
+            "saturation_mean": 65.9,
+            "saturation_std": 80.0,
+            "value_mean": 64.1,
+            "value_std": 54.9,
+            "edge_density": 0.1803,
+            "texture_variance": 2154.8,
+            "gradient_mean": 118.9
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 42,
+      "bbox": [
+        534,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.664,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.6275,
+            "white": 0.0,
+            "gray": 0.1698
+          },
+          "max_color_score": 0.6275,
+          "features": {
+            "brightness_mean": 64.7,
+            "brightness_std": 49.9,
+            "brightness_var": 2486.4,
+            "saturation_mean": 22.9,
+            "saturation_std": 21.0,
+            "value_mean": 66.5,
+            "value_std": 50.9,
+            "edge_density": 0.1859,
+            "texture_variance": 2237.4,
+            "gradient_mean": 108.9
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 43,
+      "bbox": [
+        565,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.524,
+      "led_status": "inactive",
+      "led_confidence": 0.8,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.4277,
+            "white": 0.0,
+            "gray": 0.3431
+          },
+          "max_color_score": 0.4277,
+          "features": {
+            "brightness_mean": 67.6,
+            "brightness_std": 50.2,
+            "brightness_var": 2517.2,
+            "saturation_mean": 26.3,
+            "saturation_std": 25.9,
+            "value_mean": 69.6,
+            "value_std": 50.9,
+            "edge_density": 0.2075,
+            "texture_variance": 1620.7,
+            "gradient_mean": 112.5
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0,
+          "dominant_led": null
+        }
+      }
+    },
+    {
+      "port_number": 44,
+      "bbox": [
+        596,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "black",
+      "cable_confidence": 0.48,
+      "led_status": "link",
+      "led_confidence": 0.769,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0384,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0035,
+            "black": 0.3641,
+            "white": 0.0,
+            "gray": 0.2411
+          },
+          "max_color_score": 0.3641,
+          "features": {
+            "brightness_mean": 70.4,
+            "brightness_std": 47.8,
+            "brightness_var": 2282.6,
+            "saturation_mean": 45.5,
+            "saturation_std": 54.8,
+            "value_mean": 74.7,
+            "value_std": 49.1,
+            "edge_density": 0.2041,
+            "texture_variance": 1564.3,
+            "gradient_mean": 105.8
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0384,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0384,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 45,
+      "bbox": [
+        626,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.455,
+      "led_status": "link",
+      "led_confidence": 0.699,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0349,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0021,
+            "red": 0.0,
+            "orange": 0.0014,
+            "black": 0.2048,
+            "white": 0.0,
+            "gray": 0.2215
+          },
+          "max_color_score": 0.2215,
+          "features": {
+            "brightness_mean": 68.7,
+            "brightness_std": 31.8,
+            "brightness_var": 1013.4,
+            "saturation_mean": 53.3,
+            "saturation_std": 45.9,
+            "value_mean": 73.1,
+            "value_std": 33.0,
+            "edge_density": 0.1635,
+            "texture_variance": 1241.1,
+            "gradient_mean": 81.1
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0007,
+            "orange": 0.0349,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0349,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 46,
+      "bbox": [
+        657,
+        64,
+        27,
+        53
+      ],
+      "has_cable": false,
+      "cable_color": null,
+      "cable_confidence": 0.0,
+      "led_status": "link",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0964,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.058,
+            "white": 0.0377,
+            "gray": 0.1335
+          },
+          "max_color_score": 0.1335,
+          "features": {
+            "brightness_mean": 126.1,
+            "brightness_std": 53.0,
+            "brightness_var": 2807.9,
+            "saturation_mean": 52.0,
+            "saturation_std": 47.1,
+            "value_mean": 133.5,
+            "value_std": 56.2,
+            "edge_density": 0.2537,
+            "texture_variance": 2585.8,
+            "gradient_mean": 135.2
+          },
+          "decision_factors": {
+            "color_threshold_met": false,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0818,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0818,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 47,
+      "bbox": [
+        687,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "yellow",
+      "cable_confidence": 0.694,
+      "led_status": "link",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.5632,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0021,
+            "black": 0.0818,
+            "white": 0.0105,
+            "gray": 0.0161
+          },
+          "max_color_score": 0.5632,
+          "features": {
+            "brightness_mean": 129.7,
+            "brightness_std": 57.9,
+            "brightness_var": 3349.5,
+            "saturation_mean": 143.0,
+            "saturation_std": 74.1,
+            "value_mean": 148.8,
+            "value_std": 67.4,
+            "edge_density": 0.2718,
+            "texture_variance": 3282.6,
+            "gradient_mean": 170.3
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.2041,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.2041,
+          "dominant_led": "orange"
+        }
+      }
+    },
+    {
+      "port_number": 48,
+      "bbox": [
+        718,
+        64,
+        27,
+        53
+      ],
+      "has_cable": true,
+      "cable_color": "gray",
+      "cable_confidence": 0.394,
+      "led_status": "link",
+      "led_confidence": 1.0,
+      "detection_details": {
+        "cable_analysis": {
+          "color_scores": {
+            "yellow": 0.0552,
+            "blue": 0.0,
+            "teal": 0.0,
+            "cyan": 0.0,
+            "purple": 0.0,
+            "green": 0.0,
+            "red": 0.0,
+            "orange": 0.0,
+            "black": 0.1188,
+            "white": 0.2313,
+            "gray": 0.2418
+          },
+          "max_color_score": 0.2418,
+          "features": {
+            "brightness_mean": 135.5,
+            "brightness_std": 60.2,
+            "brightness_var": 3629.8,
+            "saturation_mean": 34.6,
+            "saturation_std": 41.1,
+            "value_mean": 140.8,
+            "value_std": 62.0,
+            "edge_density": 0.1824,
+            "texture_variance": 1303.6,
+            "gradient_mean": 105.0
+          },
+          "decision_factors": {
+            "color_threshold_met": true,
+            "feature_support": true
+          }
+        },
+        "led_analysis": {
+          "led_detections": {
+            "green": 0.0,
+            "orange": 0.0552,
+            "red": 0.0,
+            "blue": 0.0
+          },
+          "max_coverage": 0.0552,
+          "dominant_led": "orange"
+        }
+      }
+    }
+  ]
+}

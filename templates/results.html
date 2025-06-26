@@ -1,0 +1,600 @@
+{% extends "base.html" %}
+
+{% block title %}Analysis Results - RackTrack{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h2>
+                <i class="fas fa-chart-line text-primary me-2"></i>
+                Analysis Results
+            </h2>
+            <p class="text-muted">
+                Original file: <strong>{{ original_filename }}</strong> | 
+                Components found: <strong>{{ results.total_components }}</strong>
+            </p>
+        </div>
+        <div>
+            <a href="{{ url_for('analyze') }}" class="btn btn-secondary me-2">
+                <i class="fas fa-arrow-left me-1"></i>
+                Upload Another
+            </a>
+            <a href="{{ url_for('download_all_results') }}" class="btn btn-primary">
+                <i class="fas fa-download me-1"></i>
+                Download All
+            </a>
+        </div>
+    </div>
+</div>
+
+{% if results.total_components == 0 %}
+<div class="alert alert-warning" role="alert">
+    <i class="fas fa-exclamation-triangle me-2"></i>
+    No network components were detected in the uploaded image. This could be due to:
+    <ul class="mt-2 mb-0">
+        <li>Low image resolution or poor lighting</li>
+        <li>Objects not clearly visible or partially obscured</li>
+        <li>Image format or quality issues</li>
+    </ul>
+</div>
+{% else %}
+
+<!-- Summary Cards -->
+<div class="row mb-4">
+    {% for class_name, images in results.grouped_images.items() %}
+    <div class="col-md-3 mb-3">
+        <div class="card text-center filter-card" data-category="{{ class_name }}" style="cursor: pointer; transition: transform 0.2s;">
+            <div class="card-body">
+                {% if class_name == 'Rack' %}
+                    <i class="fas fa-server fa-2x text-info mb-2"></i>
+                {% elif class_name == 'Switch' %}
+                    <i class="fas fa-ethernet fa-2x text-success mb-2"></i>
+                {% elif class_name == 'Port' %}
+                    <i class="fas fa-plug fa-2x text-primary mb-2"></i>
+                {% elif class_name == 'Cable' %}
+                    <i class="fas fa-ethernet fa-2x text-warning mb-2"></i>
+                {% endif %}
+                <h5 class="card-title">{{ class_name }}</h5>
+                <p class="card-text">
+                    <span class="badge bg-secondary fs-6">{{ images|length }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+<!-- Catalog Matching Results -->
+{% if results.comparison_results %}
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+                <i class="fas fa-search text-primary me-2"></i>
+                Catalog Matching Results
+                <span id="filterStatus" class="badge bg-secondary ms-2" style="display: none;"></span>
+            </h4>
+            <button id="clearFilter" class="btn btn-outline-secondary btn-sm" style="display: none;">
+                <i class="fas fa-times me-1"></i>Show All
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <p class="text-muted mb-4">
+            Components matched against catalog database using AI embeddings for precise identification.
+        </p>
+        
+        <div class="row">
+            {% for match in results.comparison_results %}
+            <div class="col-lg-4 col-md-6 mb-4 catalog-item" data-category="{{ match.category }}">
+                <div class="card h-100 clickable-card {% if match.similarity_score > 0.7 %}border-success{% elif match.similarity_score > 0.5 %}border-warning{% else %}border-secondary{% endif %}"
+                     style="cursor: pointer; transition: transform 0.2s;"
+                     data-original-image="{{ results.original_image if results.original_image else '' }}"
+                     data-coordinates='{{ match.coordinates | tojson if match.coordinates else "{}" }}'
+                     data-component-name="{{ match.name }}"
+                     data-component-category="{{ match.category }}"
+                     data-component-description="{{ match.description }}"
+                     data-similarity-score="{{ match.similarity_score }}"
+                     data-cropped-image="{{ url_for('static', filename=match.cropped_image.replace('static/', '')) }}"
+                     data-matched-image="{{ match.matched_image if match.matched_image else '' }}"
+                     data-switch-analysis='{{ match.switch_analysis | tojson if match.switch_analysis else "{}" }}'
+                     data-cable-port-info='{{ match.cable_port_info | tojson if match.cable_port_info else "{}" }}'>
+                    
+                    <div class="card-header bg-transparent">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6 class="card-title mb-0">{{ match.category }}</h6>
+                            {% if match.similarity_score > 0 %}
+                            <span class="badge {% if match.similarity_score > 0.7 %}bg-success{% elif match.similarity_score > 0.5 %}bg-warning{% else %}bg-secondary{% endif %}">
+                                {{ "%.1f"|format(match.similarity_score * 100) }}%
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="p-3">
+                        <img src="{{ url_for('static', filename=match.cropped_image.replace('static/', '')) }}" 
+                             class="img-fluid rounded" 
+                             alt="Detected {{ match.category }}"
+                             style="height: 120px; width: 100%; object-fit: cover;">
+                    </div>
+                    
+                    <div class="card-body pt-2">
+                        <p class="card-text small text-muted mb-2">
+                            <strong>Name:</strong> {{ match.name }}
+                        </p>
+                        
+                        {% if match.switch_analysis and match.category.lower() == 'switch' %}
+                        <div class="mt-2 text-center">
+                            {% set utilization = match.switch_analysis.summary.utilization_rate if match.switch_analysis.summary else match.switch_analysis.utilization_rate %}
+                            <div class="h4 mb-1 text-{% if utilization > 80 %}danger{% elif utilization > 60 %}warning{% else %}success{% endif %}">
+                                {{ utilization }}%
+                            </div>
+                            <div class="mb-2">
+                                <div class="row g-1 text-center">
+                                    <div class="col-4">
+                                        <div class="fw-bold text-success">{{ match.switch_analysis.summary.total_ports if match.switch_analysis.summary else match.switch_analysis.total_ports }}</div>
+                                        <small class="text-muted">Total Ports</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="fw-bold text-info">{{ match.switch_analysis.summary.connected_ports if match.switch_analysis.summary else match.switch_analysis.connected_ports }}</div>
+                                        <small class="text-muted">Connected</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="fw-bold text-warning">{{ match.switch_analysis.summary.empty_ports if match.switch_analysis.summary else match.switch_analysis.empty_ports }}</div>
+                                        <small class="text-muted">Empty</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if match.cable_port_info and match.category.lower() == 'cable' %}
+                        <div class="mt-3 p-2 bg-light rounded">
+                            <h6 class="text-info mb-2">
+                                <i class="fas fa-plug me-1"></i>Port Connections
+                            </h6>
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <div class="h6 mb-0 text-primary">{{ match.cable_port_info.port1 }}</div>
+                                    <small class="text-muted">Port 1</small>
+                                </div>
+                                <div class="col-6">
+                                    <div class="h6 mb-0 text-primary">{{ match.cable_port_info.port2 }}</div>
+                                    <small class="text-muted">Port 2</small>
+                                </div>
+                            </div>
+                            <div class="text-center mt-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-arrows-alt-h me-1"></i>
+                                    {{ match.cable_port_info.port1 }} ↔ {{ match.cable_port_info.port2 }}
+                                </small>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                {% if match.similarity_score > 0.7 %}
+                                    <i class="fas fa-check-circle text-success me-1"></i>Strong Match
+                                {% elif match.similarity_score > 0.5 %}
+                                    <i class="fas fa-exclamation-triangle text-warning me-1"></i>Partial Match
+                                {% else %}
+                                    <i class="fas fa-times-circle text-secondary me-1"></i>No Match
+                                {% endif %}
+                            </small>
+                            <small class="text-primary">
+                                <i class="fas fa-search-plus me-1"></i>Click to view
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Filter functionality for summary cards
+        const filterCards = document.querySelectorAll('.filter-card');
+        const catalogItems = document.querySelectorAll('.catalog-item');
+        const filterStatus = document.getElementById('filterStatus');
+        const clearFilterBtn = document.getElementById('clearFilter');
+        let currentFilter = null;
+
+        // Add hover effects for filter cards
+        filterCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.12)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '';
+            });
+
+            // Add click handler for filtering
+            card.addEventListener('click', function() {
+                const category = this.dataset.category;
+                filterByCategory(category);
+            });
+        });
+
+        // Clear filter functionality
+        clearFilterBtn.addEventListener('click', function() {
+            clearFilter();
+        });
+
+        function filterByCategory(category) {
+            currentFilter = category;
+            
+            catalogItems.forEach(item => {
+                if (item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Update filter status
+            const visibleCount = document.querySelectorAll(`.catalog-item[data-category="${category}"]`).length;
+            filterStatus.textContent = `Showing ${category} (${visibleCount})`;
+            filterStatus.style.display = 'inline-block';
+            clearFilterBtn.style.display = 'inline-block';
+
+            // Highlight active filter card
+            filterCards.forEach(card => {
+                if (card.dataset.category === category) {
+                    card.style.backgroundColor = 'rgba(13, 110, 253, 0.1)';
+                    card.style.borderColor = '#0d6efd';
+                } else {
+                    card.style.backgroundColor = '';
+                    card.style.borderColor = '';
+                }
+            });
+        }
+
+        function clearFilter() {
+            currentFilter = null;
+            
+            catalogItems.forEach(item => {
+                item.style.display = 'block';
+            });
+
+            filterStatus.style.display = 'none';
+            clearFilterBtn.style.display = 'none';
+
+            // Remove highlight from filter cards
+            filterCards.forEach(card => {
+                card.style.backgroundColor = '';
+                card.style.borderColor = '';
+            });
+        }
+
+        // Add hover effects for clickable cards
+        const clickableCards = document.querySelectorAll('.clickable-card');
+        clickableCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.12)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '';
+            });
+            
+            // Click handler for showing original image with highlighted region
+            card.addEventListener('click', function() {
+                const originalImage = this.dataset.originalImage;
+                const coordinatesStr = this.dataset.coordinates;
+                const componentName = this.dataset.componentName;
+                const componentCategory = this.dataset.componentCategory;
+                const componentDescription = this.dataset.componentDescription;
+                const similarityScore = parseFloat(this.dataset.similarityScore);
+                const croppedImage = this.dataset.croppedImage;
+                const matchedImage = this.dataset.matchedImage;
+                const switchAnalysisStr = this.dataset.switchAnalysis;
+                const cablePortInfoStr = this.dataset.cablePortInfo;
+                
+                let coordinates = {};
+                let switchAnalysis = {};
+                let cablePortInfo = {};
+                try {
+                    coordinates = JSON.parse(coordinatesStr);
+                } catch (e) {
+                    console.warn('Invalid coordinates data:', e);
+                }
+                
+                try {
+                    switchAnalysis = JSON.parse(switchAnalysisStr);
+                } catch (e) {
+                    // Switch analysis is optional
+                }
+                
+                try {
+                    cablePortInfo = JSON.parse(cablePortInfoStr);
+                } catch (e) {
+                    // Cable port info is optional
+                }
+                
+                if (!originalImage) {
+                    alert('Original image not available');
+                    return;
+                }
+                
+                // Create modal with original image and highlight overlay
+                const modal = document.createElement('div');
+                modal.className = 'modal fade';
+                modal.innerHTML = `
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    <i class="fas fa-search-plus me-2"></i>
+                                    ${componentName} - Location in Original Image
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="text-center">
+                                            <div class="position-relative d-inline-block">
+                                                <img id="originalImage" src="${originalImage}" class="img-fluid" alt="Original Image" style="max-height: 70vh;">
+                                                ${coordinates.x1 !== undefined ? `
+                                                    <div class="highlight-box" style="
+                                                        position: absolute;
+                                                        left: ${coordinates.x1}px;
+                                                        top: ${coordinates.y1}px;
+                                                        width: ${coordinates.width || (coordinates.x2 - coordinates.x1)}px;
+                                                        height: ${coordinates.height || (coordinates.y2 - coordinates.y1)}px;
+                                                        border: 3px solid #ff0000;
+                                                        background: rgba(255, 0, 0, 0.1);
+                                                        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+                                                        pointer-events: none;
+                                                    "></div>
+                                                    <div class="component-label" style="
+                                                        position: absolute;
+                                                        left: ${coordinates.x1}px;
+                                                        top: ${coordinates.y1 - 25}px;
+                                                        background: #ff0000;
+                                                        color: white;
+                                                        padding: 2px 8px;
+                                                        border-radius: 4px;
+                                                        font-size: 12px;
+                                                        font-weight: bold;
+                                                        pointer-events: none;
+                                                    ">${componentName}</div>
+                                                ` : ''}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6 class="mb-0">
+                                                    <i class="fas fa-info-circle me-2"></i>Component Details
+                                                </h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <strong>Category:</strong> 
+                                                    <span class="badge bg-primary ms-2">${componentCategory}</span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <strong>Name:</strong> ${componentName}
+                                                </div>
+                                                <div class="mb-3">
+                                                    <strong>Description:</strong>
+                                                    <p class="text-muted mt-1 mb-0">${componentDescription}</p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <strong>Detected Component:</strong><br>
+                                                    <img src="${croppedImage}" class="img-fluid rounded border mt-1" 
+                                                         style="max-height: 100px;" alt="Detected ${componentCategory}">
+                                                </div>
+                                                ${switchAnalysis.summary || switchAnalysis.total_ports ? `
+                                                <div class="mt-3 p-3 bg-light rounded">
+                                                    <h6 class="text-primary mb-3">
+                                                        <i class="fas fa-ethernet me-1"></i>Switch Port Analysis
+                                                    </h6>
+                                                    
+                                                    <!-- Summary Overview -->
+                                                    <div class="row g-2 mb-3">
+                                                        <div class="col-4">
+                                                            <div class="text-center">
+                                                                <div class="h5 mb-0 text-success">${switchAnalysis.summary ? switchAnalysis.summary.total_ports : switchAnalysis.total_ports}</div>
+                                                                <small class="text-muted">Total Ports</small>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="text-center">
+                                                                <div class="h5 mb-0 text-info">${switchAnalysis.summary ? switchAnalysis.summary.connected_ports : switchAnalysis.connected_ports}</div>
+                                                                <small class="text-muted">Connected</small>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="text-center">
+                                                                <div class="h5 mb-0 text-warning">${switchAnalysis.summary ? switchAnalysis.summary.empty_ports : (switchAnalysis.total_ports - switchAnalysis.connected_ports)}</div>
+                                                                <small class="text-muted">Empty</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="mb-3">
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <span class="text-muted">Utilization:</span>
+                                                            <span class="badge ${(switchAnalysis.summary ? switchAnalysis.summary.utilization_rate : switchAnalysis.utilization_rate) > 80 ? 'bg-danger' : (switchAnalysis.summary ? switchAnalysis.summary.utilization_rate : switchAnalysis.utilization_rate) > 60 ? 'bg-warning' : 'bg-success'}">
+                                                                ${switchAnalysis.summary ? switchAnalysis.summary.utilization_rate : switchAnalysis.utilization_rate}%
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- Cable Color Distribution -->
+                                                    ${switchAnalysis.summary && switchAnalysis.summary.cable_distribution ? 
+                                                        '<div class="mb-3">' +
+                                                        '<h6 class="text-muted mb-2">Cable Colors:</h6>' +
+                                                        '<div class="d-flex flex-wrap gap-1">' +
+                                                        Object.entries(switchAnalysis.summary.cable_distribution).map(([color, count]) => {
+                                                            const colorClass = color === 'black' ? 'dark' : 
+                                                                              color === 'white' ? 'light text-dark' :
+                                                                              color === 'yellow' ? 'warning' :
+                                                                              color === 'blue' ? 'primary' :
+                                                                              color === 'green' ? 'success' :
+                                                                              color === 'red' ? 'danger' :
+                                                                              color === 'orange' ? 'warning' :
+                                                                              color === 'purple' ? 'secondary' :
+                                                                              color === 'teal' ? 'info' : 'secondary';
+                                                            return '<span class="badge bg-' + colorClass + ' small">' + color.charAt(0).toUpperCase() + color.slice(1) + ': ' + count + '</span>';
+                                                        }).join('') +
+                                                        '</div>' +
+                                                        '</div>' : ''}
+                                                    
+                                                    <!-- LED Status Distribution -->
+                                                    ${switchAnalysis.summary && switchAnalysis.summary.led_distribution ? 
+                                                        '<div class="mb-3">' +
+                                                        '<h6 class="text-muted mb-2">LED Status:</h6>' +
+                                                        '<div class="d-flex flex-wrap gap-1">' +
+                                                        Object.entries(switchAnalysis.summary.led_distribution).map(([status, count]) => {
+                                                            const statusClass = status === 'active' ? 'success' :
+                                                                               status === 'link' ? 'info' :
+                                                                               status === 'activity' ? 'primary' :
+                                                                               status === 'error' ? 'danger' : 'secondary';
+                                                            const iconClass = status === 'active' ? 'fa-check-circle' :
+                                                                              status === 'link' ? 'fa-link' :
+                                                                              status === 'activity' ? 'fa-bolt' :
+                                                                              status === 'error' ? 'fa-exclamation-triangle' : 'fa-circle';
+                                                            return '<span class="badge bg-' + statusClass + ' small"><i class="fas ' + iconClass + ' me-1"></i>' + status.charAt(0).toUpperCase() + status.slice(1) + ': ' + count + '</span>';
+                                                        }).join('') +
+                                                        '</div>' +
+                                                        '</div>' : ''}
+                                                    
+                                                    <!-- Individual Port Details -->
+                                                    ${switchAnalysis.ports && switchAnalysis.ports.length > 0 ? 
+                                                        '<div class="mt-3">' +
+                                                        '<h6 class="text-muted mb-2">Port Details (All ' + switchAnalysis.ports.length + ' ports):</h6>' +
+                                                        '<div class="card card-body bg-white" style="max-height: 400px; overflow-y: auto;">' +
+                                                        switchAnalysis.ports.map(port => 
+                                                            '<div class="d-flex justify-content-between align-items-center py-1 border-bottom">' +
+                                                                '<span class="fw-bold">Port ' + port.port_number + ':</span>' +
+                                                                '<div>' +
+                                                                    (port.has_cable ? 
+                                                                        '<span class="badge bg-' + (port.cable_color === 'yellow' ? 'warning' : 
+                                                                                                      port.cable_color === 'blue' ? 'primary' :
+                                                                                                      port.cable_color === 'green' ? 'success' :
+                                                                                                      port.cable_color === 'red' ? 'danger' : 'secondary') + ' me-1">' +
+                                                                            (port.cable_color ? port.cable_color.charAt(0).toUpperCase() + port.cable_color.slice(1) : 'Cable') +
+                                                                        '</span>'
+                                                                     : '<span class="badge bg-light text-dark me-1">Empty</span>') +
+                                                                    (port.led_status !== 'inactive' ? 
+                                                                        '<span class="badge bg-' + (port.led_status === 'active' ? 'success' :
+                                                                                                     port.led_status === 'link' ? 'info' :
+                                                                                                     port.led_status === 'error' ? 'danger' : 'primary') + '">' +
+                                                                            port.led_status.charAt(0).toUpperCase() + port.led_status.slice(1) +
+                                                                        '</span>'
+                                                                     : '') +
+                                                                '</div>' +
+                                                            '</div>'
+                                                        ).join('') +
+                                                        '</div>' +
+                                                        '</div>' : ''}
+                                                </div>
+                                                ` : ''}
+                                                ${cablePortInfo.port1 && componentCategory.toLowerCase() === 'cable' ? `
+                                                <div class="mt-3 p-3 bg-light rounded">
+                                                    <h6 class="text-info mb-2">
+                                                        <i class="fas fa-plug me-1"></i>Port Connections
+                                                    </h6>
+                                                    <div class="row text-center">
+                                                        <div class="col-6">
+                                                            <div class="h6 mb-0 text-primary">${cablePortInfo.port1}</div>
+                                                            <small class="text-muted">Port 1</small>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="h6 mb-0 text-primary">${cablePortInfo.port2}</div>
+                                                            <small class="text-muted">Port 2</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-center mt-2">
+                                                        <small class="text-muted">
+                                                            <i class="fas fa-arrows-alt-h me-1"></i>
+                                                            ${cablePortInfo.port1} ↔ ${cablePortInfo.port2}
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                ` : ''}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="w-100 text-center">
+                                    <small class="text-muted">
+                                        ${coordinates.x1 !== undefined ? 
+                                            `Detected at coordinates (${coordinates.x1}, ${coordinates.y1}) - Size: ${coordinates.width || (coordinates.x2 - coordinates.x1)}×${coordinates.height || (coordinates.y2 - coordinates.y1)}px` : 
+                                            'Location coordinates not available'
+                                        }
+                                        ${coordinates.confidence ? ` | Confidence: ${(coordinates.confidence * 100).toFixed(1)}%` : ''}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                const bsModal = new bootstrap.Modal(modal);
+                bsModal.show();
+                
+                // Scale coordinates based on actual image display size
+                bsModal._element.addEventListener('shown.bs.modal', function() {
+                    const img = document.getElementById('originalImage');
+                    const highlightBox = modal.querySelector('.highlight-box');
+                    const componentLabel = modal.querySelector('.component-label');
+                    
+                    if (img && highlightBox && coordinates.x1 !== undefined) {
+                        const scaleX = img.clientWidth / img.naturalWidth;
+                        const scaleY = img.clientHeight / img.naturalHeight;
+                        
+                        const scaledX1 = coordinates.x1 * scaleX;
+                        const scaledY1 = coordinates.y1 * scaleY;
+                        const scaledWidth = (coordinates.width || (coordinates.x2 - coordinates.x1)) * scaleX;
+                        const scaledHeight = (coordinates.height || (coordinates.y2 - coordinates.y1)) * scaleY;
+                        
+                        highlightBox.style.left = scaledX1 + 'px';
+                        highlightBox.style.top = scaledY1 + 'px';
+                        highlightBox.style.width = scaledWidth + 'px';
+                        highlightBox.style.height = scaledHeight + 'px';
+                        
+                        if (componentLabel) {
+                            componentLabel.style.left = scaledX1 + 'px';
+                            componentLabel.style.top = (scaledY1 - 25) + 'px';
+                        }
+                    }
+                });
+                
+                // Remove modal from DOM when hidden
+                modal.addEventListener('hidden.bs.modal', function() {
+                    document.body.removeChild(modal);
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

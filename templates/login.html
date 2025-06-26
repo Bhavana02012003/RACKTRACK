@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}Login - RackTrack{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="width: 100%; max-width: 100%; margin: 0; padding: 0 15px;">
+    <div class="row justify-content-center" style="margin: 0; width: 100%;">
+        <div class="col-lg-5 col-md-6">
+            <div class="login-container">
+                <!-- Login Header -->
+                <div class="login-header">
+                    <div class="login-logo">
+                        <svg width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                            <path d="M8 12h16M8 16h16M8 20h12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                    <stop stop-color="#2563eb"/>
+                                    <stop offset="1" stop-color="#3b82f6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h1 class="login-title">Welcome to RackTrack</h1>
+                    <p class="login-subtitle">Sign in to access AI-powered rack analysis</p>
+                </div>
+
+                <!-- Login Form -->
+                <form method="POST" class="login-form">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required 
+                               placeholder="Enter your username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required 
+                               placeholder="Enter your password">
+                    </div>
+                    
+                    <button type="submit" class="btn-login">
+                        Sign In
+                    </button>
+                </form>
+
+                <!-- Demo Credentials -->
+                <div class="demo-info">
+                    <h6>Demo Credentials</h6>
+                    <p><strong>Username:</strong> 1234</p>
+                    <p><strong>Password:</strong> 1234</p>
+                </div>
+
+                <!-- Footer Links -->
+                <div class="login-footer">
+                    <a href="{{ url_for('home') }}" class="back-link">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<style>
+.login-container {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 1.5rem;
+    padding: 3rem 2.5rem;
+    box-shadow: var(--shadow-xl);
+    margin-top: 2rem;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.login-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.login-form {
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.btn-login {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    border: none;
+    padding: 0.875rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-blue);
+}
+
+.demo-info {
+    background: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.demo-info h6 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.demo-info p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin: 0.25rem 0;
+}
+
+.login-footer {
+    text-align: center;
+}
+
+.back-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+    }
+    
+    .login-title {
+        font-size: 1.5rem;
+    }
+}
+</style>
+{% endblock %}

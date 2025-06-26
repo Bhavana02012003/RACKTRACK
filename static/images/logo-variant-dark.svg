@@ -1,0 +1,113 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Dark Theme Background -->
+    <rect width="48" height="48" rx="16" fill="url(#darkLogoGradient)" opacity="0.95"/>
+    <rect width="48" height="48" rx="16" fill="url(#darkShine)" opacity="0.4"/>
+    
+    <!-- Server Rack Structure -->
+    <rect x="10" y="8" width="28" height="32" rx="2" fill="none" stroke="url(#darkRackStroke)" stroke-width="1.5"/>
+    
+    <!-- Rack Slots with Neon Effect -->
+    <g class="rack-slots">
+        <rect x="12" y="12" width="24" height="3" rx="1.5" fill="url(#darkSlotGradient1)"/>
+        <rect x="12" y="17" width="20" height="3" rx="1.5" fill="url(#darkSlotGradient2)"/>
+        <rect x="12" y="22" width="22" height="3" rx="1.5" fill="url(#darkSlotGradient3)"/>
+        <rect x="12" y="27" width="18" height="3" rx="1.5" fill="url(#darkSlotGradient4)"/>
+        <rect x="12" y="32" width="24" height="3" rx="1.5" fill="url(#darkSlotGradient5)"/>
+    </g>
+    
+    <!-- AI Neural Network Pattern -->
+    <g class="neural-network" opacity="0.9">
+        <circle cx="38" cy="14" r="2.5" fill="url(#darkNeuralGradient1)"/>
+        <circle cx="38" cy="20" r="2.5" fill="url(#darkNeuralGradient2)"/>
+        <circle cx="38" cy="26" r="2.5" fill="url(#darkNeuralGradient3)"/>
+        <circle cx="38" cy="32" r="2.5" fill="url(#darkNeuralGradient4)"/>
+        
+        <!-- Glowing Connection Lines -->
+        <path d="M36 16 L36 18" stroke="url(#darkConnectionGradient)" stroke-width="2" opacity="0.8" filter="url(#glow)"/>
+        <path d="M36 22 L36 24" stroke="url(#darkConnectionGradient)" stroke-width="2" opacity="0.8" filter="url(#glow)"/>
+        <path d="M36 28 L36 30" stroke="url(#darkConnectionGradient)" stroke-width="2" opacity="0.8" filter="url(#glow)"/>
+    </g>
+    
+    <defs>
+        <!-- Dark Theme Gradients -->
+        <linearGradient id="darkLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e1b4b"/>
+            <stop offset="30%" stop-color="#312e81"/>
+            <stop offset="70%" stop-color="#1e3a8a"/>
+            <stop offset="100%" stop-color="#1f2937"/>
+        </linearGradient>
+        
+        <linearGradient id="darkShine" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="transparent"/>
+            <stop offset="45%" stop-color="rgba(139,92,246,0.3)"/>
+            <stop offset="55%" stop-color="rgba(99,102,241,0.5)"/>
+            <stop offset="100%" stop-color="transparent"/>
+        </linearGradient>
+        
+        <linearGradient id="darkRackStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#8b5cf6"/>
+        </linearGradient>
+        
+        <!-- Neon Slot Gradients -->
+        <linearGradient id="darkSlotGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#8b5cf6"/>
+        </linearGradient>
+        
+        <linearGradient id="darkSlotGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#34d399"/>
+            <stop offset="100%" stop-color="#10b981"/>
+        </linearGradient>
+        
+        <linearGradient id="darkSlotGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#fbbf24"/>
+            <stop offset="100%" stop-color="#f59e0b"/>
+        </linearGradient>
+        
+        <linearGradient id="darkSlotGradient4" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#22d3ee"/>
+            <stop offset="100%" stop-color="#06b6d4"/>
+        </linearGradient>
+        
+        <linearGradient id="darkSlotGradient5" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#c084fc"/>
+            <stop offset="100%" stop-color="#a855f7"/>
+        </linearGradient>
+        
+        <!-- Glowing Neural Network -->
+        <radialGradient id="darkNeuralGradient1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#34d399"/>
+            <stop offset="100%" stop-color="#059669"/>
+        </radialGradient>
+        
+        <radialGradient id="darkNeuralGradient2" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fbbf24"/>
+            <stop offset="100%" stop-color="#d97706"/>
+        </radialGradient>
+        
+        <radialGradient id="darkNeuralGradient3" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#22d3ee"/>
+            <stop offset="100%" stop-color="#0891b2"/>
+        </radialGradient>
+        
+        <radialGradient id="darkNeuralGradient4" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f87171"/>
+            <stop offset="100%" stop-color="#dc2626"/>
+        </radialGradient>
+        
+        <linearGradient id="darkConnectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#8b5cf6"/>
+        </linearGradient>
+        
+        <!-- Glow Filter -->
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+</svg>

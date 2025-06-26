@@ -1,0 +1,465 @@
+{% extends "base.html" %}
+
+{% block title %}Analyze Rack Components - RackTrack{% endblock %}
+
+{% block content %}
+<style>
+/* Enhanced Analyze Page Styling */
+.analyze-page {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #e0e7ff 50%, #dbeafe 75%, #bfdbfe 100%);
+    min-height: 100vh;
+    padding: 3rem 0;
+    position: relative;
+}
+
+.analyze-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 40% 60%, rgba(96, 165, 250, 0.03) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.analyze-container {
+    position: relative;
+    z-index: 2;
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+
+
+.enhanced-upload-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 20px 50px rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    margin-bottom: 2rem;
+}
+</style>
+
+<div class="analyze-page">
+    <div class="analyze-container">
+
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+            <!-- Enhanced Upload Card -->
+            <div class="enhanced-upload-section">
+                <form id="uploadForm" action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                    <!-- Enhanced Drag & Drop Zone -->
+                    <div class="upload-zone enhanced-upload-zone" id="uploadZone">
+                        <div class="upload-visual">
+                            <div class="upload-icon-gradient">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div class="upload-animation">
+                                <div class="upload-dots">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="upload-content">
+                            <h4 class="upload-title">Drag & Drop image here or click to browse</h4>
+                            <p class="upload-subtitle">Supported formats: JPEG, PNG, WebP • Max size: 16MB</p>
+                            <div class="upload-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Instant Processing</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-eye"></i>
+                                    <span>AI Detection</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-download"></i>
+                                    <span>Download Results</span>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="file" id="fileInput" name="file" accept="image/*" required style="display: none;">
+                    </div>
+
+                    <!-- Preview Area -->
+                    <div id="imagePreview" class="image-preview" style="display: none;">
+                        <div class="preview-container">
+                            <img id="previewImg" alt="Preview">
+                            <button type="button" class="remove-image" id="removeImage">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="image-info">
+                            <span id="fileName"></span>
+                            <span id="fileSize"></span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="upload-actions">
+                        <button type="submit" class="btn btn-primary-gradient" id="uploadBtn">
+                            <i class="fas fa-cloud-upload-alt me-2"></i>
+                            Upload Image
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" id="cameraBtn">
+                            <i class="fas fa-camera me-2"></i>
+                            Use Camera
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Progress Section -->
+                <div id="progressContainer" class="progress-section" style="display: none;">
+                    <div class="progress-content">
+                        <div class="spinner">
+                            <div class="double-bounce1"></div>
+                            <div class="double-bounce2"></div>
+                        </div>
+                        <h4>Processing your image...</h4>
+                        <p>Our AI is analyzing the rack components</p>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-modern">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Info -->
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h5>Component Detection</h5>
+                    <p>Automatically identifies cables, switches, ports, racks, and fuses</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h5>Detailed Reports</h5>
+                    <p>Get comprehensive analysis with coordinates and metadata</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h5>Instant Results</h5>
+                    <p>Processing typically completes in under 30 seconds</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+
+    </div>
+</div>
+
+<style>
+/* Enhanced Upload Zone Styling */
+.enhanced-upload-zone {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+    border: 2px dashed rgba(37, 99, 235, 0.3);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.enhanced-upload-zone:hover {
+    border-color: rgba(37, 99, 235, 0.5);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.95) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+}
+
+.upload-visual {
+    margin-bottom: 2rem;
+}
+
+.upload-icon-gradient {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+}
+
+.upload-icon-gradient i {
+    font-size: 2rem;
+    color: white;
+}
+
+.upload-animation {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.upload-dots .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation: uploadPulse 1.5s ease-in-out infinite;
+}
+
+.upload-dots .dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.upload-dots .dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes uploadPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.upload-content {
+    margin-bottom: 2rem;
+}
+
+.upload-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.upload-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.upload-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.stat-item i {
+    color: var(--primary-color);
+}
+
+/* Enhanced Button Styling */
+.enhanced-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-analyze-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-analyze-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+    color: white;
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-analyze-primary:hover .btn-glow {
+    left: 100%;
+}
+
+.btn-analyze-secondary {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(37, 99, 235, 0.2);
+    color: var(--primary-color);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-analyze-secondary:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .enhanced-upload-zone {
+        padding: 3rem 1rem;
+    }
+    
+    .upload-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .enhanced-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadZone = document.getElementById('uploadZone');
+    const fileInput = document.getElementById('fileInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewImg = document.getElementById('previewImg');
+    const fileName = document.getElementById('fileName');
+    const fileSize = document.getElementById('fileSize');
+    const removeImage = document.getElementById('removeImage');
+    const uploadForm = document.getElementById('uploadForm');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const progressContainer = document.getElementById('progressContainer');
+
+    // Click to browse
+    uploadZone.addEventListener('click', () => fileInput.click());
+
+    // Drag and drop functionality
+    uploadZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadZone.classList.add('dragover');
+    });
+
+    uploadZone.addEventListener('dragleave', () => {
+        uploadZone.classList.remove('dragover');
+    });
+
+    uploadZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            handleFileSelect(files[0]);
+        }
+    });
+
+    // File input change
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleFileSelect(e.target.files[0]);
+        }
+    });
+
+    // Remove image
+    removeImage.addEventListener('click', () => {
+        fileInput.value = '';
+        imagePreview.style.display = 'none';
+        uploadZone.style.display = 'flex';
+        uploadBtn.innerHTML = '<i class="fas fa-cloud-upload-alt me-2"></i>Upload Image';
+    });
+
+    // Handle file selection
+    function handleFileSelect(file) {
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+            alert('Please select a valid image file.');
+            return;
+        }
+
+        // Validate file size (16MB)
+        if (file.size > 16 * 1024 * 1024) {
+            alert('File size must be less than 16MB.');
+            return;
+        }
+
+        // Show preview
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            if (previewImg) previewImg.src = e.target.result;
+            if (fileName) fileName.textContent = file.name;
+            if (fileSize) fileSize.textContent = formatFileSize(file.size);
+            
+            if (uploadZone) uploadZone.style.display = 'none';
+            if (imagePreview) imagePreview.style.display = 'block';
+            if (uploadBtn) uploadBtn.innerHTML = '<i class="fas fa-cogs me-2"></i>Process Image';
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Format file size
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // Form submission
+    uploadForm.addEventListener('submit', (e) => {
+        if (!fileInput.files.length) {
+            e.preventDefault();
+            alert('Please select an image first.');
+            return;
+        }
+
+        // Show progress
+        progressContainer.style.display = 'block';
+        uploadBtn.disabled = true;
+        
+        // Simulate progress animation
+        const progressFill = document.querySelector('.progress-fill');
+        progressFill.style.width = '100%';
+    });
+});
+</script>
+{% endblock %}

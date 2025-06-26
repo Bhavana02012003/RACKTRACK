@@ -1,0 +1,42 @@
+{
+  "static/segmented_outputs/Rack/6bed0d86f19ff3bdcb642cf73102bed8_1750834742_Rack_0.jpg": {
+    "x1": 50,
+    "y1": 50,
+    "x2": 200,
+    "y2": 300,
+    "width": 150,
+    "height": 250,
+    "confidence": 0.85,
+    "class_name": "Rack"
+  },
+  "static/segmented_outputs/Switch/6bed0d86f19ff3bdcb642cf73102bed8_1750834742_Switch_1.jpg": {
+    "x1": 220,
+    "y1": 100,
+    "x2": 400,
+    "y2": 180,
+    "width": 180,
+    "height": 80,
+    "confidence": 0.92,
+    "class_name": "Switch"
+  },
+  "static/segmented_outputs/Cable/6bed0d86f19ff3bdcb642cf73102bed8_1750834742_Cable_2.jpg": {
+    "x1": 100,
+    "y1": 320,
+    "x2": 350,
+    "y2": 380,
+    "width": 250,
+    "height": 60,
+    "confidence": 0.78,
+    "class_name": "Cable"
+  },
+  "static/segmented_outputs/Port/6bed0d86f19ff3bdcb642cf73102bed8_1750834742_Port_3.jpg": {
+    "x1": 250,
+    "y1": 120,
+    "x2": 280,
+    "y2": 140,
+    "width": 30,
+    "height": 20,
+    "confidence": 0.89,
+    "class_name": "Port"
+  }
+}

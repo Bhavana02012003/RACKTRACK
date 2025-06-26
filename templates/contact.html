@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - RackTrack{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="max-width: 90vw; margin: 0 auto; padding: 0 2rem;">
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Get in Touch</h1>
+        <p class="lead text-muted">Have questions? We're here to help you succeed with RackTrack</p>
+    </div>
+
+    <div class="row g-5">
+        <!-- Contact Form -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-envelope me-2"></i>Send us a Message</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form id="contactForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="firstName" class="form-label">First Name *</label>
+                                <input type="text" class="form-control" id="firstName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lastName" class="form-label">Last Name *</label>
+                                <input type="text" class="form-control" id="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="company" class="form-label">Company</label>
+                            <input type="text" class="form-control" id="company">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject *</label>
+                            <select class="form-select" id="subject" required>
+                                <option value="">Select a topic...</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="technical">Technical Support</option>
+                                <option value="sales">Sales & Pricing</option>
+                                <option value="partnership">Partnership Opportunities</option>
+                                <option value="feedback">Product Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Tell us how we can help you..." required></textarea>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Information -->
+        <div class="col-lg-4">
+            <div class="sticky-top" style="top: 2rem;">
+                <!-- Quick Contact -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-3">
+                            <i class="fas fa-headset text-primary me-2"></i>Quick Contact
+                        </h5>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-envelope text-primary me-2"></i>
+                            <strong>Email:</strong><br>
+                            <a href="mailto:support@racktrack.ai" class="text-decoration-none">support@racktrack.ai</a>
+                        </div>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-clock text-primary me-2"></i>
+                            <strong>Response Time:</strong><br>
+                            <span class="text-muted">Usually within 24 hours</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe text-primary me-2"></i>
+                            <strong>Availability:</strong><br>
+                            <span class="text-muted">24/7 System Access</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Support Resources -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-3">
+                            <i class="fas fa-life-ring text-primary me-2"></i>Support Resources
+                        </h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <a href="{{ url_for('features') }}" class="text-decoration-none">
+                                    <i class="fas fa-star me-2"></i>Feature Documentation
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="{{ url_for('analyze') }}" class="text-decoration-none">
+                                    <i class="fas fa-play me-2"></i>Try the Demo
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="#" class="text-decoration-none">
+                                    <i class="fas fa-question-circle me-2"></i>FAQ
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-decoration-none">
+                                    <i class="fas fa-book me-2"></i>API Documentation
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-3">
+                            <i class="fas fa-share-alt text-primary me-2"></i>Connect With Us
+                        </h5>
+                        <div class="d-flex gap-3">
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FAQ Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            What types of rack components can RackTrack detect?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            RackTrack can detect and analyze cables, switches, ports, racks, fuses, and various electrical components. Our AI models are trained on comprehensive datasets to recognize different component types, colors, and configurations commonly found in data centers.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            How accurate is the AI detection?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Our AI models achieve 99.9% accuracy in component detection and classification. We continuously improve our models through ongoing training with new data and user feedback to maintain the highest possible accuracy rates.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            What image formats are supported?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            RackTrack supports JPG, JPEG, PNG, and BMP image formats with a maximum file size of 16MB. For best results, we recommend using high-resolution images with good lighting that clearly show the rack components.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            How long does processing take?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Most images are processed in under 30 seconds. Processing time may vary depending on image size, complexity, and current system load, but our optimized infrastructure ensures consistently fast results.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        company: document.getElementById('company').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+    };
+    
+    // Simple validation
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.subject || !formData.message) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+    
+    // Simulate form submission
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+    submitBtn.disabled = true;
+    
+    setTimeout(() => {
+        alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+        this.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }, 2000);
+});
+</script>
+{% endblock %}

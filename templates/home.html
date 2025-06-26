@@ -1,0 +1,1668 @@
+{% extends "base.html" %}
+
+{% block title %}RackTrack - AI-Powered Rack Component Analysis{% endblock %}
+
+{% block content %}
+<style>
+/* Dark Blue, White & Black Theme */
+:root {
+    --dark-blue: #1e3a8a;
+    --medium-blue: #3b82f6;
+    --light-blue: #60a5fa;
+    --pure-white: #ffffff;
+    --soft-white: #f8fafc;
+    --charcoal: #1f2937;
+    --glass-gradient: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+    --shadow-blue: 0 0 30px rgba(59, 130, 246, 0.3);
+    --shadow-dark: 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+.home-container {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* White and Blue Light Gradient Background */
+.home-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(96, 165, 250, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 60% 40%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(147, 197, 253, 0.2) 0%, transparent 40%),
+        linear-gradient(135deg, #ffffff 0%, #f8fafc 20%, #e0e7ff 40%, #dbeafe 60%, #bfdbfe 80%, #ffffff 100%);
+    z-index: -2;
+}
+
+/* Subtle Network Grid Pattern */
+.home-container::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+    background-size: 80px 80px;
+    animation: lightGridMove 25s linear infinite;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+@keyframes lightGridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(80px, 80px); }
+}
+
+/* Floating Particles */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--medium-blue);
+    border-radius: 50%;
+    animation: float 6s infinite linear;
+    box-shadow: 0 0 10px var(--medium-blue);
+}
+
+.particle:nth-child(2n) {
+    background: var(--light-blue);
+    box-shadow: 0 0 8px var(--light-blue);
+    animation-duration: 8s;
+}
+
+.particle:nth-child(3n) {
+    background: var(--charcoal);
+    box-shadow: 0 0 6px var(--charcoal);
+    animation-duration: 10s;
+}
+
+/* Network Hardware Background Styling */
+.network-hardware-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.hw-element {
+    position: absolute;
+    opacity: 0.25;
+    animation: hardwareFloat 35s infinite linear;
+}
+
+.hw-element.rack {
+    width: 50px;
+    height: 80px;
+    background: linear-gradient(180deg, rgba(30, 58, 138, 0.8), rgba(37, 99, 235, 0.6));
+    border: 2px solid rgba(30, 58, 138, 0.9);
+    border-radius: 8px;
+    box-shadow: 
+        0 0 20px rgba(30, 58, 138, 0.6),
+        0 0 40px rgba(37, 99, 235, 0.3),
+        inset 0 0 15px rgba(59, 130, 246, 0.2);
+    position: relative;
+    animation: rackPulse 6s infinite ease-in-out;
+}
+
+.hw-element.rack::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    height: 4px;
+    background: rgba(34, 197, 94, 1);
+    border-radius: 2px;
+    box-shadow: 
+        0 10px 0 rgba(34, 197, 94, 0.8),
+        0 20px 0 rgba(59, 130, 246, 0.9),
+        0 30px 0 rgba(30, 58, 138, 0.8),
+        0 40px 0 rgba(34, 197, 94, 0.6);
+    animation: rackLights 2s infinite;
+}
+
+.hw-element.switch {
+    width: 70px;
+    height: 25px;
+    background: linear-gradient(90deg, rgba(30, 58, 138, 0.9), rgba(37, 99, 235, 0.7));
+    border: 2px solid rgba(30, 58, 138, 1);
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 
+        0 0 15px rgba(30, 58, 138, 0.6),
+        0 0 30px rgba(37, 99, 235, 0.4);
+    animation: switchGlow 4s infinite ease-in-out;
+}
+
+.hw-element.switch::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 4px;
+    height: 4px;
+    background: rgba(34, 197, 94, 1);
+    border-radius: 50%;
+    box-shadow: 
+        8px 0 0 rgba(34, 197, 94, 1),
+        16px 0 0 rgba(59, 130, 246, 1),
+        24px 0 0 rgba(34, 197, 94, 1),
+        32px 0 0 rgba(30, 58, 138, 1),
+        40px 0 0 rgba(37, 99, 235, 1);
+    animation: switchLEDs 1.5s infinite;
+}
+
+.hw-element.cable {
+    width: 100px;
+    height: 6px;
+    background: linear-gradient(90deg, 
+        rgba(30, 58, 138, 0.9) 0%, 
+        rgba(37, 99, 235, 0.8) 25%, 
+        rgba(59, 130, 246, 0.9) 50%,
+        rgba(37, 99, 235, 0.8) 75%,
+        rgba(30, 58, 138, 0.9) 100%);
+    border-radius: 3px;
+    transform: rotate(25deg);
+    box-shadow: 
+        0 0 12px rgba(30, 58, 138, 0.8),
+        0 0 25px rgba(37, 99, 235, 0.5),
+        0 2px 0 rgba(30, 58, 138, 0.6);
+    animation: cablePulse 3s infinite, cableWave 8s infinite;
+}
+
+.hw-element.port {
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(30, 58, 138, 0.9), rgba(37, 99, 235, 0.7));
+    border: 3px solid rgba(30, 58, 138, 1);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 15px rgba(30, 58, 138, 0.8),
+        0 0 30px rgba(37, 99, 235, 0.6),
+        inset 0 0 8px rgba(59, 130, 246, 0.4);
+    animation: portGlow 2.5s infinite, portRotate 12s infinite linear;
+}
+
+.hw-element.server {
+    width: 65px;
+    height: 40px;
+    background: linear-gradient(180deg, rgba(30, 58, 138, 0.9), rgba(37, 99, 235, 0.7));
+    border: 2px solid rgba(30, 58, 138, 1);
+    border-radius: 6px;
+    position: relative;
+    box-shadow: 
+        0 0 18px rgba(30, 58, 138, 0.7),
+        0 0 35px rgba(37, 99, 235, 0.4),
+        inset 0 0 10px rgba(59, 130, 246, 0.3);
+    animation: serverBreathe 5s infinite ease-in-out;
+}
+
+.hw-element.server::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 8px;
+    height: 3px;
+    background: rgba(34, 197, 94, 1);
+    border-radius: 1px;
+    box-shadow: 
+        0 6px 0 rgba(34, 197, 94, 1),
+        0 12px 0 rgba(37, 99, 235, 1),
+        0 18px 0 rgba(30, 58, 138, 1),
+        15px 0 0 rgba(59, 130, 246, 1),
+        15px 6px 0 rgba(30, 58, 138, 0.8);
+    animation: serverStatus 1.8s infinite;
+}
+
+@keyframes hardwareFloat {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.25;
+    }
+    90% {
+        opacity: 0.25;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Enhanced Dark Blue Hardware Animations */
+@keyframes rackPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 
+            0 0 20px rgba(30, 58, 138, 0.6),
+            0 0 40px rgba(37, 99, 235, 0.3);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 
+            0 0 30px rgba(30, 58, 138, 0.9),
+            0 0 60px rgba(37, 99, 235, 0.6);
+    }
+}
+
+@keyframes rackLights {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    25% { opacity: 0.7; transform: translateY(-1px); }
+    50% { opacity: 1; transform: translateY(0); }
+    75% { opacity: 0.5; transform: translateY(1px); }
+}
+
+@keyframes switchGlow {
+    0%, 100% { 
+        box-shadow: 
+            0 0 15px rgba(30, 58, 138, 0.6),
+            0 0 30px rgba(37, 99, 235, 0.4);
+    }
+    50% { 
+        box-shadow: 
+            0 0 25px rgba(30, 58, 138, 0.9),
+            0 0 50px rgba(37, 99, 235, 0.7);
+    }
+}
+
+@keyframes switchLEDs {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    20% { opacity: 0.8; transform: scale(0.9); }
+    40% { opacity: 1; transform: scale(1.1); }
+    60% { opacity: 0.6; transform: scale(0.95); }
+    80% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes cablePulse {
+    0%, 100% { 
+        box-shadow: 
+            0 0 12px rgba(30, 58, 138, 0.8),
+            0 0 25px rgba(37, 99, 235, 0.5);
+        opacity: 0.3;
+    }
+    50% { 
+        box-shadow: 
+            0 0 20px rgba(30, 58, 138, 1),
+            0 0 40px rgba(37, 99, 235, 0.8);
+        opacity: 0.5;
+    }
+}
+
+@keyframes cableWave {
+    0% { transform: rotate(25deg) scaleX(1); }
+    25% { transform: rotate(27deg) scaleX(1.1); }
+    50% { transform: rotate(23deg) scaleX(1); }
+    75% { transform: rotate(26deg) scaleX(0.9); }
+    100% { transform: rotate(25deg) scaleX(1); }
+}
+
+@keyframes portGlow {
+    0%, 100% { 
+        box-shadow: 
+            0 0 15px rgba(30, 58, 138, 0.8),
+            0 0 30px rgba(37, 99, 235, 0.6);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 
+            0 0 25px rgba(30, 58, 138, 1),
+            0 0 50px rgba(37, 99, 235, 0.9);
+        transform: scale(1.15);
+    }
+}
+
+@keyframes portRotate {
+    0% { transform: rotate(0deg) scale(1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes serverBreathe {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 
+            0 0 18px rgba(30, 58, 138, 0.7),
+            0 0 35px rgba(37, 99, 235, 0.4);
+    }
+    50% { 
+        transform: scale(1.08);
+        box-shadow: 
+            0 0 28px rgba(30, 58, 138, 1),
+            0 0 55px rgba(37, 99, 235, 0.7);
+    }
+}
+
+@keyframes serverStatus {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    20% { opacity: 0.8; transform: scale(0.95); }
+    40% { opacity: 1; transform: scale(1.05); }
+    60% { opacity: 0.7; transform: scale(0.9); }
+    80% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+/* Enhanced Hero Section */
+.hero-section {
+    padding: 100px 0 60px;
+    position: relative;
+    background: var(--glass-gradient);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-left {
+    padding-right: 2rem;
+}
+
+.hero-right {
+    padding-left: 2rem;
+}
+
+.hero-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.btn-get-started {
+    background: #ffffff;
+    color: #2563eb;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 2px solid #2563eb;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-get-started::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.btn-get-started:hover::before {
+    left: 100%;
+}
+
+.btn-get-started:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.3);
+    color: #2563eb;
+    text-decoration: none;
+    background: #ffffff;
+    border-color: #2563eb;
+}
+
+.btn-get-started i {
+    color: #2563eb;
+}
+
+.hero-subtitle-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--medium-blue);
+    margin-bottom: 1rem;
+}
+
+.hero-image-container {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.hero-main-image {
+    width: 100%;
+    height: 400px;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 40px -10px rgba(37, 99, 235, 0.2);
+    transition: all 0.3s ease;
+    object-fit: cover;
+}
+
+.hero-main-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 50px -10px rgba(37, 99, 235, 0.3);
+}
+
+.hero-action-card {
+    background: var(--glass-gradient);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+}
+
+.hero-action-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--dark-blue), var(--medium-blue), var(--light-blue));
+}
+
+.action-header {
+    margin-bottom: 2rem;
+}
+
+.action-header i {
+    font-size: 3rem;
+    color: var(--medium-blue);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.action-header h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+}
+
+.action-header p {
+    color: #64748b;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.hero-buttons-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btn-large {
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-large i {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.btn-large span {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.btn-large strong {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.btn-large small {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.hero-stats-compact {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.stat-mini {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--medium-blue);
+    margin-bottom: 0.2rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.trust-indicators {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.trust-item i {
+    color: var(--medium-blue);
+    font-size: 1rem;
+}
+
+.hero-content {
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background: var(--glass-gradient);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--medium-blue);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: var(--shadow-blue);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+    to { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--charcoal) 0%, var(--dark-blue) 50%, var(--medium-blue) 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    animation: gradientShift 3s ease-in-out infinite;
+    text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #64748b;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Elegant Dark Blue Buttons */
+.btn-primary {
+    position: relative;
+    background: linear-gradient(135deg, var(--dark-blue), var(--medium-blue));
+    color: var(--pure-white);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: var(--shadow-blue);
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-dark);
+    color: var(--pure-white);
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background: var(--glass-gradient);
+    backdrop-filter: blur(15px);
+    color: #2563eb;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.btn-secondary:hover {
+    background: rgba(37, 99, 235, 0.1);
+    border-color: var(--medium-blue);
+    color: var(--dark-blue);
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+}
+
+/* Holographic Features Section */
+.features-section {
+    padding: 60px 0;
+    position: relative;
+    background: var(--glass-gradient);
+    backdrop-filter: blur(10px);
+}
+
+.section-container {
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: var(--glass-gradient);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--medium-blue);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.section-title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--charcoal), var(--dark-blue), var(--medium-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Holographic Feature Cards */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.feature-card {
+    position: relative;
+    background: var(--glass-gradient);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--dark-blue), var(--medium-blue), var(--light-blue));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feature-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    opacity: 0;
+    transition: all 0.3s ease;
+    animation: rotate 8s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.feature-card:hover::after {
+    opacity: 1;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-blue);
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+.feature-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 3;
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, var(--dark-blue), var(--medium-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--pure-white);
+    margin-right: 1rem;
+    box-shadow: var(--shadow-blue);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.feature-card:hover .feature-icon::before {
+    transform: translateX(100%);
+}
+
+.feature-meta {
+    flex: 1;
+    position: relative;
+    z-index: 3;
+}
+
+.feature-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--charcoal);
+    margin-bottom: 0.3rem;
+}
+
+.feature-tag {
+    font-size: 0.7rem;
+    color: var(--dark-blue);
+    background: rgba(30, 58, 138, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(30, 58, 138, 0.2);
+}
+
+.feature-desc {
+    color: #64748b;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 3;
+}
+
+.feature-benefits {
+    display: grid;
+    gap: 0.8rem;
+    position: relative;
+    z-index: 3;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 500;
+    color: #475569;
+    font-size: 0.9rem;
+}
+
+.benefit-item i {
+    color: var(--medium-blue);
+    font-size: 1rem;
+    width: 16px;
+}
+
+/* Elegant Dark Blue CTA Section */
+.cta-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, var(--charcoal) 0%, var(--dark-blue) 50%, #1e3a8a 100%);
+    color: var(--pure-white);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(30, 58, 138, 0.1) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.cta-content {
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    background: linear-gradient(135deg, var(--pure-white), var(--light-blue), var(--medium-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cta-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-white {
+    background: linear-gradient(135deg, var(--pure-white), var(--soft-white));
+    color: var(--charcoal);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-white::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-white:hover::before {
+    left: 100%;
+}
+
+.btn-white:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    color: var(--charcoal);
+    text-decoration: none;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--pure-white);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-outline:hover {
+    background: var(--glass-gradient);
+    backdrop-filter: blur(10px);
+    border-color: var(--light-blue);
+    color: var(--pure-white);
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-blue);
+}
+
+/* Data Center Section Styling */
+.datacenter-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #1e40af 75%, #1e3a8a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.datacenter-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(30, 58, 138, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
+    z-index: 1;
+}
+
+.datacenter-content {
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem 2rem;
+}
+
+.datacenter-text {
+    padding-right: 2rem;
+}
+
+.datacenter-text .section-badge {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.datacenter-text .section-title {
+    color: #ffffff !important;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.section-title {
+    color: #ffffff !important;
+}
+
+.datacenter-text .section-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.datacenter-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.datacenter-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.datacenter-feature:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+}
+
+.datacenter-feature i {
+    color: #60a5fa;
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+.datacenter-feature span {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.datacenter-showcase {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.datacenter-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.datacenter-showcase:hover .datacenter-image {
+    transform: scale(1.05);
+}
+
+.datacenter-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 2rem;
+}
+
+.datacenter-stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.stat-item {
+    text-align: left;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--pure-white);
+    line-height: 1;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0.3rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .datacenter-features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .datacenter-text {
+        padding-right: 0;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+    
+    .datacenter-features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .cta-title {
+        font-size: 2rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    .hero-buttons,
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-left {
+        padding-right: 0;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .hero-right {
+        padding-left: 0;
+    }
+    
+
+
+    .hero-stats-compact {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-action-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .btn-large {
+        padding: 1.2rem 1.5rem;
+        text-align: center;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .btn-large span {
+        text-align: center;
+    }
+
+    .hero-stats-compact {
+        gap: 1rem;
+    }
+
+    .trust-indicators {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-section {
+        padding: 80px 0 40px;
+    }
+
+    .features-section,
+    .cta-section {
+        padding: 40px 0;
+    }
+
+    .hero-action-card {
+        margin: 0 1rem;
+    }
+
+    .action-header h3 {
+        font-size: 1.5rem;
+    }
+}
+</style>
+
+<!-- Floating Particles -->
+<!-- Animated Network Hardware Background Elements -->
+<div class="network-hardware-bg">
+    <!-- Server Rack Elements -->
+    <div class="hw-element rack" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="hw-element rack" style="top: 60%; left: 15%; animation-delay: 8s;"></div>
+    <div class="hw-element rack" style="top: 25%; left: 85%; animation-delay: 16s;"></div>
+    <div class="hw-element rack" style="top: 75%; left: 90%; animation-delay: 24s;"></div>
+    
+    <!-- Network Switch Elements -->
+    <div class="hw-element switch" style="top: 20%; left: 25%; animation-delay: 2s;"></div>
+    <div class="hw-element switch" style="top: 70%; left: 35%; animation-delay: 10s;"></div>
+    <div class="hw-element switch" style="top: 40%; left: 75%; animation-delay: 18s;"></div>
+    <div class="hw-element switch" style="top: 85%; left: 65%; animation-delay: 26s;"></div>
+    
+    <!-- Cable Elements -->
+    <div class="hw-element cable" style="top: 30%; left: 45%; animation-delay: 4s;"></div>
+    <div class="hw-element cable" style="top: 80%; left: 55%; animation-delay: 12s;"></div>
+    <div class="hw-element cable" style="top: 15%; left: 65%; animation-delay: 20s;"></div>
+    <div class="hw-element cable" style="top: 55%; left: 25%; animation-delay: 28s;"></div>
+    
+    <!-- Port Elements -->
+    <div class="hw-element port" style="top: 35%; left: 15%; animation-delay: 6s;"></div>
+    <div class="hw-element port" style="top: 65%; left: 45%; animation-delay: 14s;"></div>
+    <div class="hw-element port" style="top: 45%; left: 85%; animation-delay: 22s;"></div>
+    <div class="hw-element port" style="top: 90%; left: 35%; animation-delay: 30s;"></div>
+    
+    <!-- Server Elements -->
+    <div class="hw-element server" style="top: 50%; left: 10%; animation-delay: 1s;"></div>
+    <div class="hw-element server" style="top: 25%; left: 55%; animation-delay: 9s;"></div>
+    <div class="hw-element server" style="top: 75%; left: 75%; animation-delay: 17s;"></div>
+    <div class="hw-element server" style="top: 5%; left: 40%; animation-delay: 25s;"></div>
+</div>
+
+<div class="particles">
+    <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+    <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+    <div class="particle" style="left: 40%; animation-delay: 3s;"></div>
+    <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+    <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+    <div class="particle" style="left: 70%; animation-delay: 0.5s;"></div>
+    <div class="particle" style="left: 80%; animation-delay: 1.5s;"></div>
+    <div class="particle" style="left: 90%; animation-delay: 2.5s;"></div>
+</div>
+
+<div class="home-container">
+    <!-- Enhanced Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="row align-items-center">
+                <!-- Left Side Image -->
+                <div class="col-lg-6">
+                    <div class="hero-image-container">
+                        <img src="{{ url_for('static', filename='images/data-center-server-room.jpg') }}" alt="Modern Data Center Server Room" class="hero-main-image">
+                    </div>
+                </div>
+
+                <!-- Right Side Content -->
+                <div class="col-lg-6">
+                    <div class="hero-right">
+                        <div class="hero-badge">Next-Gen AI Technology</div>
+                        <h1 class="hero-title">SprintPark Rack Analysis</h1>
+                        <h2 class="hero-subtitle-header">Powered by AI</h2>
+                        <p class="hero-subtitle">
+                            Transform your infrastructure with cutting-edge computer vision. 
+                            Automatically detect, analyze, and catalog rack components with unprecedented accuracy.
+                        </p>
+                        
+                        <div class="hero-cta">
+                            {% if current_user.is_authenticated %}
+                                <a href="{{ url_for('analyze') }}" class="btn-get-started">
+                                    <i class="fas fa-rocket"></i>
+                                    Get Started
+                                </a>
+                            {% else %}
+                                <a href="{{ url_for('login') }}" class="btn-get-started">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    Get Started
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Center Environment Section -->
+    <section class="datacenter-section">
+        <div class="section-container">
+            <div class="datacenter-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="datacenter-text">
+                            <div class="section-badge" style="color: #ffffff !important;">AI Neural Networks</div>
+                            <h2 class="section-title" style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;">Advanced Computer Vision AI</h2>
+                            <p class="section-subtitle">
+                                Powered by advanced neural networks and deep learning algorithms, RackTrack's AI vision system 
+                                processes visual data through multiple layers of artificial intelligence to deliver unprecedented 
+                                accuracy in component detection, cable analysis, and automated infrastructure mapping.
+                            </p>
+                            <div class="datacenter-features">
+                                <div class="datacenter-feature">
+                                    <i class="fas fa-brain"></i>
+                                    <span>AI-powered component detection</span>
+                                </div>
+                                <div class="datacenter-feature">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Real-time visual analysis</span>
+                                </div>
+                                <div class="datacenter-feature">
+                                    <i class="fas fa-map"></i>
+                                    <span>Automated port mapping</span>
+                                </div>
+                                <div class="datacenter-feature">
+                                    <i class="fas fa-microchip"></i>
+                                    <span>Neural processing engine</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="datacenter-showcase">
+                            <img src="{{ url_for('static', filename='images/white-blue-ai-vision.jpg') }}" alt="RackTrack White Blue AI Vision System" class="datacenter-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Holographic Features Section -->
+    <section class="features-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Advanced AI Features</div>
+                <h2 class="section-title">Comprehensive Component Analysis</h2>
+                <p class="section-subtitle">
+                    Experience next-generation infrastructure management with our state-of-the-art 
+                    computer vision technology designed for data center environments.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="feature-meta">
+                            <h3 class="feature-title">Computer Vision</h3>
+                            <div class="feature-tag">AI Powered</div>
+                        </div>
+                    </div>
+                    <p class="feature-desc">
+                        Advanced YOLO v8 models trained specifically for data center environments. 
+                        Automatically detects and classifies cables, switches, racks, fuses, and ports 
+                        with industry-leading accuracy.
+                    </p>
+                    <div class="feature-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Multi-object detection in single pass</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Real-time bounding box coordinates</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Confidence scoring for each detection</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Support for complex rack configurations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <div class="feature-meta">
+                            <h3 class="feature-title">Smart Segmentation</h3>
+                            <div class="feature-tag">Precision</div>
+                        </div>
+                    </div>
+                    <p class="feature-desc">
+                        Each detected component is precisely segmented using advanced image processing algorithms. 
+                        Components are automatically cropped, categorized, and saved for detailed analysis 
+                        and documentation purposes.
+                    </p>
+                    <div class="feature-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Pixel-perfect component isolation</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Automatic category-based organization</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Metadata preservation during segmentation</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>High-resolution output maintenance</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="feature-meta">
+                            <h3 class="feature-title">Export & Integration</h3>
+                            <div class="feature-tag">Enterprise</div>
+                        </div>
+                    </div>
+                    <p class="feature-desc">
+                        Comprehensive export capabilities including individual component images, 
+                        complete analysis packages, JSON metadata, and coordinate information. 
+                        Perfect for integration with existing asset management systems.
+                    </p>
+                    <div class="feature-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Individual component downloads</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Bulk ZIP package exports</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>JSON metadata with coordinates</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>API-ready data formats</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="feature-meta">
+                            <h3 class="feature-title">Catalog Matching</h3>
+                            <div class="feature-tag">Advanced</div>
+                        </div>
+                    </div>
+                    <p class="feature-desc">
+                        Intelligent component identification using CLIP embeddings and FAISS similarity search. 
+                        Automatically matches detected components against extensive product catalogs 
+                        for instant identification and specifications.
+                    </p>
+                    <div class="feature-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Neural embedding-based matching</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Similarity score calculations</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Extensive product database</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check"></i>
+                            <span>Automatic specification lookup</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cyber CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Transform Your Infrastructure</h2>
+            <p class="cta-subtitle">
+                Join thousands of professionals who rely on RackTrack for accurate, 
+                automated component analysis. Start your analysis today.
+            </p>
+            <div class="cta-buttons">
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('analyze') }}" class="btn-white">
+                        <i class="fas fa-rocket"></i>
+                        Start Analysis Now
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="btn-white">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Get Started Free
+                    </a>
+                {% endif %}
+                <a href="{{ url_for('contact') }}" class="btn-outline">
+                    <i class="fas fa-phone"></i>
+                    Contact Sales
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

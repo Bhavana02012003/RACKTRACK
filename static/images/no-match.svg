@@ -1,0 +1,6 @@
+<svg width="120" height="120" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+  <circle cx="60" cy="45" r="15" fill="#6c757d"/>
+  <path d="M45 75 Q60 85 75 75" stroke="#6c757d" stroke-width="3" fill="none"/>
+  <text x="60" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6c757d">No Match</text>
+</svg>
